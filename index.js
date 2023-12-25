@@ -7,7 +7,15 @@ const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 const port = process.env.PORT || 5000;
 
 // middleware
-app.use(cors());
+
+const corsOptions = {
+  origin: "https://task-quest-f553d.web.app",
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
+
 app.use(express.json());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.ivv8ial.mongodb.net/?retryWrites=true&w=majority`;
@@ -65,6 +73,16 @@ async function run() {
       const result = await taskCollection.find(query).toArray();
       res.send(result);
     });
+
+    app.get("/tasks/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = {
+        _id: new ObjectId(id),
+      };
+      const result = await taskCollection.findOne(query);
+      res.send(result);
+    });
+
     app.post("/tasks", async (req, res) => {
       const task = req.body;
       const result = await taskCollection.insertOne(task);
