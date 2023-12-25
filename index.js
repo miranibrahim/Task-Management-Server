@@ -57,12 +57,29 @@ async function run() {
     });
 
     // ------------------------Tasks------------------------------
+    app.get('/tasks/:email', async(req, res)=>{
+      const email = req.params.email;
+      const query = {
+        userEmail : email,
+      };
+      const result = await taskCollection.find(query).toArray();
+      res.send(result);
+    })
     app.post('/tasks', async(req, res)=>{
       const task = req.body;
       const result = await taskCollection.insertOne(task);
       res.send(result);
     })
 
+    app.delete('/tasks/:id', async(req, res)=> {
+      const id = req.params.id;
+      const query = {
+        _id : new ObjectId(id),
+      };
+      const result = await taskCollection.deleteOne(query);
+      res.send(result);
+    })
+// -------------------------------------------------------------END-----------------------------------------------------------------------------
     await client.db("admin").command({ ping: 1 });
     console.log(
       "Pinged your deployment. You successfully connected to MongoDB!"
@@ -80,3 +97,4 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
+
