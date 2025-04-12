@@ -1,5 +1,3 @@
----
-
 ### 📁 `backend/README.md`
 
 ```markdown
