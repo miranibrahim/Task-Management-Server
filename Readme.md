@@ -1,6 +1,3 @@
-### 📁 `backend/README.md`
-
-```markdown
 # 🧠 Task Management Backend
 
 This is the **backend** for the Task Management System — a RESTful API built using **Express.js** with **JWT-based authentication** and **MongoDB** for data persistence.
