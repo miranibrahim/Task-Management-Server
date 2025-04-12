@@ -11,7 +11,21 @@ const authRoutes = require("./routes/auth.route");
 const app = express();
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+const allowedOrigins = [
+  'http://localhost:5173', // local dev
+  'https://task-quest-f553d.web.app', // deployed frontend
+];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+  credentials: true, // if you're using cookies or auth headers
+}));
 app.use(express.json());
 
 app.use("/users", userRoutes);
