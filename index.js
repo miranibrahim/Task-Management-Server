@@ -1,10 +1,12 @@
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
+const jwt = require("jsonwebtoken");
+const { connectDB } = require("./config/db");
 
 const userRoutes = require("./routes/user.route");
 const taskRoutes = require("./routes/task.route");
-const { connectDB } = require("./config/db");
+const authRoutes = require("./routes/auth.route");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -14,6 +16,7 @@ app.use(express.json());
 
 app.use("/users", userRoutes);
 app.use("/tasks", taskRoutes);
+app.use("/", authRoutes);
 
 app.get("/", (req, res) => {
   res.send("running ar running!");
