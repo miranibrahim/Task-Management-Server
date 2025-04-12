@@ -4,7 +4,7 @@ const {
   getTasksByEmail,
   getTaskById,
   addTask,
-  updateTaskStatus,
+  updateStatus,
   deleteTask,
   updateTask
 } = require("../controllers/task.controller");
@@ -16,7 +16,7 @@ router.get("/:email", verifyToken, getTasksByEmail);
 router.get("/:id", verifyToken, getTaskById);
 router.post("/", verifyToken, addTask);
 router.patch("/update/:id", verifyToken, updateTask);
-router.patch("/:id", verifyToken, updateTaskStatus);
+router.patch("/:id", verifyToken, updateStatus);
 router.delete("/:id", verifyToken, deleteTask);
 
 module.exports = router;

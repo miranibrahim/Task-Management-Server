@@ -22,7 +22,7 @@ const addTask = async (req, res) => {
   res.send(result);
 };
 
-const updateTaskStatus = async (req, res) => {
+const updateStatus = async (req, res) => {
   const id = req.params.id;
   const status = req.body.status;
   const query = { _id: new ObjectId(id) };
@@ -69,7 +69,7 @@ module.exports = {
   getTasksByEmail,
   getTaskById,
   addTask,
-  updateTaskStatus,
+  updateStatus,
   deleteTask,
   updateTask
 };
