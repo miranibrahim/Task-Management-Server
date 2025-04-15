@@ -13,7 +13,7 @@ const port = process.env.PORT || 5000;
 
 const allowedOrigins = [
   'http://localhost:5173', // local dev
-  'https://task-management-client-weld.vercel.app', // deployed frontend
+  'https://taskquest1.vercel.app', // deployed frontend
 ];
 
 app.use(cors({
